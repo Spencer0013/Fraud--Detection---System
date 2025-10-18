@@ -48,7 +48,8 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 
 ### Confusion Matrix
 ```
-![alt text](image.png)
+<img width="423" height="402" alt="Screenshot 2025-10-18 202818" src="https://github.com/user-attachments/assets/03f01322-d71f-4cdd-a76c-aed54922b985" />
+
 ```
 
 - **High recall** indicates the model successfully detects a majority of fraudulent transactions.
@@ -65,7 +66,8 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 5. Transaction Amount  
 6. Account Age Days  
 
-![alt text](image-1.png)
+<img width="980" height="808" alt="Screenshot 2025-10-18 203008" src="https://github.com/user-attachments/assets/99cbbd59-41b2-4905-86f0-bfa803a8affd" />
+
 
 These temporal and account-based signals are **key behavioral indicators** for fraud detection.
 
