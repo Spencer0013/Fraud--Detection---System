@@ -47,9 +47,8 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 | PR-AUC                | 0.243      |
 
 ### Confusion Matrix
-```
-<img width="423" height="402" alt="Screenshot 2025-10-18 202818" src="https://github.com/user-attachments/assets/03f01322-d71f-4cdd-a76c-aed54922b985" />
 
+<img width="419" height="408" alt="Screenshot 2025-10-18 202754" src="https://github.com/user-attachments/assets/c91d0d83-8fd1-47a2-8a41-008ef06c7de2" />
 ```
 
 - **High recall** indicates the model successfully detects a majority of fraudulent transactions.
