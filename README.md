@@ -47,8 +47,8 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 | PR-AUC                | 0.243      |
 
 ### Confusion Matrix
-```
-![alt text](image.png)
+
+<img width="419" height="408" alt="Screenshot 2025-10-18 202754" src="https://github.com/user-attachments/assets/c91d0d83-8fd1-47a2-8a41-008ef06c7de2" />
 ```
 
 - **High recall** indicates the model successfully detects a majority of fraudulent transactions.
@@ -65,7 +65,14 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 5. Transaction Amount  
 6. Account Age Days  
 
-![alt text](image-1.png)
+<img width="980" height="808" alt="Screenshot 2025-10-18 203008" src="https://github.com/user-attachments/assets/99cbbd59-41b2-4905-86f0-bfa803a8affd" />
+
+
+<img width="1106" height="705" alt="Screenshot 2025-10-18 202924" src="https://github.com/user-attachments/assets/c83b7541-95ab-4400-b914-5780df90adca" />
+
+
+
+
 
 These temporal and account-based signals are **key behavioral indicators** for fraud detection.
 
