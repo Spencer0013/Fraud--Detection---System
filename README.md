@@ -17,8 +17,8 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 ---
 
 ## Dataset
-- Number of transactions: ~23,000+  
-- Fraudulent transactions: ~1,200 (~5%)  
+- Number of transactions: 200,000  
+- Fraudulent transactions: 10,057 (5%)  
 - **Key feature categories:**
   - Temporal features (Transaction Hour, Hour Bin, tx hour)
   - Account features (New Account, Account Age Days)
@@ -30,7 +30,8 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 ## Modeling Approach
 1. **Data preprocessing**: handling missing values, scaling, encoding, and feature engineering.  
 2. **Imbalance handling**: used SMOTE and class weights to address fraud rarity.  
-3. **Model selection**: compared Logistic Regression, Random Forest, XGBoost and CatBoost models.  
+3. **Model selection**: compared Logistic Regression, Random Forest, XGBoost and CatBoost models. 
+4. **Hyperparameter tuning**: Hypertuned top 3 models using RandomizedSearchCV 
 4. **Evaluation**: prioritized **precision-recall** performance over accuracy, due to the nature of fraud detection.
 
 ---
@@ -47,10 +48,7 @@ The primary objective is to **maximize fraud recall** while maintaining a **mana
 
 ### Confusion Matrix
 ```
-True Negatives  (TN): 20627
-False Positives (FP): 1785
-False Negatives (FN):  366
-True Positives  (TP):  856
+![alt text](image.png)
 ```
 
 - **High recall** indicates the model successfully detects a majority of fraudulent transactions.
@@ -66,6 +64,8 @@ True Positives  (TP):  856
 4. New Account  
 5. Transaction Amount  
 6. Account Age Days  
+
+![alt text](image-1.png)
 
 These temporal and account-based signals are **key behavioral indicators** for fraud detection.
 
