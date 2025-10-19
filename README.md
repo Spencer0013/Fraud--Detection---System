@@ -1,4 +1,4 @@
-# Fraud Detection Capstone Project 
+# Fraud Detection System
 
 ## Overview
 This project focuses on building and evaluating a **machine learning model for fraud detection** in financial transaction data. Fraud detection is a **highly imbalanced classification problem**, where fraudulent transactions are rare but have high business impact.  
