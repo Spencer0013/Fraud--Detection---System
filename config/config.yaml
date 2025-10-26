@@ -1,0 +1,31 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_train_path: Data\Train.csv
+  source_test_path: Data\Test.csv
+  train_path: artifacts/data_ingestion/train_data.csv
+  test_path: artifacts/data_ingestion/test_data.csv
+
+
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  train_path: artifacts/data_ingestion/train_data.csv
+  test_path: artifacts/data_ingestion/test_data.csv
+  train_data: artifacts/data_transformation/train.csv
+  test_data: artifacts/data_transformation/test.csv
+  preprocessor: artifacts/data_transformation/preprocessor.pkl
+
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  model_save_path: artifacts/model_trainer/model.pkl
+
+
+
+  model_evaluation:
+    root_dir: artifacts/model_evaluation
+    best_model_path: artifacts/model_trainer/model.pkl
+    save_path: artifacts/model_evaluation/evaluation_results.json
+    preprocessor: artifacts/preprocessor.pkl 
