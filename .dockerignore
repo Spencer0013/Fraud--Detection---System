@@ -1,0 +1,41 @@
+# VCS / IDE
+.git
+.gitignore
+.vscode
+.idea
+
+# Python cruft
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.venv
+venv
+.env
+.env.*
+
+# Data / artifacts
+data/
+datasets/
+models/
+outputs/
+notebooks/
+*.csv
+*.parquet
+*.pkl
+*.npz
+*.pth
+*.onnx
+*.joblib
+
+# Caches
+.pytest_cache/
+.cache/
+dist/
+build/
+
+# OS / OneDrive temp files
+.DS_Store
+Thumbs.db
+~$*
