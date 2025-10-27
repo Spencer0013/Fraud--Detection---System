@@ -24,6 +24,15 @@ The final model(Catboost) achieves strong performance on fraud detection, with r
 
 ---
 
+##  Demo
+
+This project is deployed using streamlit providing an easy-to-use and interactive web interface for fraud detection.
+
+## Live Demo / Recording
+
+You can watch a short recording of the deployed app here:  
+[View Deployment Recording](c:\Users\ainao\OneDrive\Videos\Captures\Fraud Detection System and 27 more pages - Personal - Microsoft​ Edge 2025-10-27 11-27-39.mp4)
+
 # Dataset
 
 The dataset used for training and testing the fraud detection model was sourced from Kaggle
