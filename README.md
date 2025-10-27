@@ -31,7 +31,7 @@ This project is deployed using streamlit providing an easy-to-use and interactiv
 ## Live Demo / Recording
 
 You can watch a short recording of the deployed app here:  
-[View Deployment Recording](c:\Users\ainao\OneDrive\Videos\Captures\Fraud Detection System and 27 more pages - Personal - Microsoft​ Edge 2025-10-27 11-27-39.mp4)
+[View Deployment Recording](https://1drv.ms/v/c/50c5cfe66d856efa/EY0_F3F8HpNBp6dDOsTVY4MBED2x3eKlHUVROMagdqO20Q?e=0hrhHU)
 
 # Dataset
 
