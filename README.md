@@ -30,8 +30,10 @@ This project is deployed using streamlit providing an easy-to-use and interactiv
 
 ## Live Demo / Recording
 
-You can watch a short recording of the deployed app here: 
-[Screenshot](<img width="1846" height="1008" alt="Screenshot 2025-10-27 114137" src="https://github.com/user-attachments/assets/581aa231-aeca-401c-9150-df8e73d8d7ea" />)
+You can see a screenshot and watch a short recording of the deployed app here: 
+
+<img width="1846" height="1008" alt="Screenshot 2025-10-27 114137" src="https://github.com/user-attachments/assets/37a69ada-0edf-44c0-83be-ceba04232f26" />
+
 
 [View Deployment Recording](https://1drv.ms/v/c/50c5cfe66d856efa/EY0_F3F8HpNBp6dDOsTVY4MBED2x3eKlHUVROMagdqO20Q?e=0hrhHU)
 
