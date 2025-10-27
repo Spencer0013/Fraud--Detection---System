@@ -98,7 +98,7 @@ This project is driven by a single YAML config that defines artifact locations a
 
 ## Project Structure
 
-``
+```
 .
 ├── app.py                    # streamlit UI for predictions
 ├── main.py                   # Training pipeline entry point
