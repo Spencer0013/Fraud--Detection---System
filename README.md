@@ -92,7 +92,8 @@ The final model(Catboost) achieves strong performance on fraud detection, with r
 
 This project is driven by a single YAML config that defines artifact locations and I/O paths for each pipeline stage.
 
-![alt text](<Screenshot 2025-10-27 110743.png>)
+<img width="668" height="644" alt="image" src="https://github.com/user-attachments/assets/4c576e5e-a2b4-46ff-916e-23e1a9bed8ee" />
+
 
 
 
