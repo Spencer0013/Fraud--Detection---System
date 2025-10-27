@@ -1,109 +1,150 @@
 # Fraud Detection System
 
+An end-to-end machine learning system for detecting fraudulent transactions using structured model pipelines, explainability tools, and production deployment components.
+
 ## Overview
 This project focuses on building and evaluating a **machine learning model for fraud detection** in financial transaction data. Fraud detection is a **highly imbalanced classification problem**, where fraudulent transactions are rare but have high business impact.  
 The primary objective is to **maximize fraud recall** while maintaining a **manageable false positive rate**, enabling effective triage for manual review or further automated workflows.
 
----
+It follows a **two-stage approach**:
 
-## Tech Stack & Libraries
-- **Python 3**
-- pandas, numpy, scikit-learn
-- xgboost / lightgbm / catboost
-- imbalanced-learn (SMOTE, class weighting)
-- matplotlib, seaborn
-- shap (for explainability)
+1. **Experimentation Phase (Notebook)**  
+   - Exploratory Data Analysis (EDA)  
+   - Feature engineering and model experimentation (xgboost / lightgbm / catboost) 
+   - Hyperparameter tuning on a 200,000-row dataset to select the best performing model.
+   - **Evaluation**: prioritized **precision-recall** performance over accuracy, due to the nature of fraud detection.
+   - Model explainability using feature importance and SHAP values 
 
----
+2. **Production Phase (Pipeline)**  
+   - Training the best model on the **entire dataset**  
+   - Evaluating it on a hold-out test set  
+   - Packaging and deploying it with streamlit
 
-## Dataset
-- Number of transactions: 200,000  
-- Fraudulent transactions: 10,057 (5%)  
-- **Key feature categories:**
-  - Temporal features (Transaction Hour, Hour Bin, tx hour)
-  - Account features (New Account, Account Age Days)
-  - Transaction amount & log features
-  - Geolocation/IP features
+The final model(Catboost) achieves strong performance on fraud detection, with results shown below.
 
 ---
 
-## Modeling Approach
-1. **Data preprocessing**: handling missing values, scaling, encoding, and feature engineering.  
-2. **Imbalance handling**: used SMOTE and class weights to address fraud rarity.  
-3. **Model selection**: compared Logistic Regression, Random Forest, XGBoost and CatBoost models. 
-4. **Hyperparameter tuning**: Hypertuned top 3 models using RandomizedSearchCV 
-4. **Evaluation**: prioritized **precision-recall** performance over accuracy, due to the nature of fraud detection.
+## Model Performance
 
----
-
-## Model Evaluation (Test Set)
 | Metric                | Score       |
-|------------------------|------------|
-| Accuracy              | 0.909      |
-| Precision (fraud=1)   | 0.32       |
-| Recall (fraud=1)      | 0.70       |
-| F1 Score (fraud=1)    | 0.44       |
-| ROC-AUC               | 0.81       |
-| PR-AUC                | 0.243      |
+|-------------------------|------------|
+| ROC-AUC                 | **0.8639** |
+| PR-AUC                  | 0.6476     |
+| Recall (fraud)          | 0.6882     |
+| Precision (fraud)       | 0.3454     |
+| F1 (fraud)              | 0.4599     |
+| F2 (fraud)              | 0.5742     |
+| Accuracy (overall)      | 0.9164     |
 
-### Confusion Matrix
+**Confusion Matrix (Label: 0 = Non-fraud, 1 = Fraud)**
 
-<img width="419" height="408" alt="Screenshot 2025-10-18 202754" src="https://github.com/user-attachments/assets/c91d0d83-8fd1-47a2-8a41-008ef06c7de2" />
+|             | Predicted 0 | Predicted 1 |
+|-------------|-------------|-------------|
+| Actual 0    | 20818       | 1594        |
+| Actual 1    | 381         | 841         |
+
+
+---
+
+## Key Capabilities
+
+- **Modular ML pipeline** for training, evaluation, and inference.
+- **EDA and model explainability** (feature importance + SHAP) during experimentation.
+- **Config-driven architecture** for reproducibility and maintainability.
+- **Production-ready model** with serialization, clean interfaces, and a user-friendly Streamlit interface for serving predictions
+- **Containerized deployment** with Docker.
+- **Comprehensive evaluation logging** in structured JSON format.
+
+---
+
+
+## Project Structure
+
+```
+.
+├── app.py                    # streamlit UI for predictions
+├── main.py                   # Training pipeline entry point
+├── config/                   # Config files (paths, params)
+├── src/
+│   ├── components/           # Data processing & model training modules
+│   ├── pipeline/             # Training & prediction pipelines
+│   └── utils/                # Utility functions
+├── artifacts/                # Serialized models, transformers
+├── notebooks/                # EDA, feature importance, SHAP analysis
+├── evaluation_results.json   # Final model metrics on test data
+├── Dockerfile
+├── requirements.txt
+└── setup.py
 ```
 
-- **High recall** indicates the model successfully detects a majority of fraudulent transactions.
-- **Moderate precision** is acceptable for triage settings (manual review queues).
-- **PR AUC of 0.24** is realistic for highly imbalanced fraud datasets.
+---
+
+##  Getting Started
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/yourusername/Fraud-Detection-System.git
+cd Fraud-Detection-System
+```
+
+### 2. Create and activate a virtual environment
+
+```bash
+python -m venv venv
+source venv/bin/activate   
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Train the model
+
+```bash
+python main.py
+```
+
+This runs the full training pipeline, saves the model and transformer to `artifacts/`, and updates evaluation metrics.
+
+### 5. Start the prediction API
+
+```bash
+python app.py
+```
 
 ---
 
-## Feature Importance (Top Drivers)
-1. Transaction Hour  
-2. Hour Bin  
-3. tx hour  
-4. New Account  
-5. Transaction Amount  
-6. Account Age Days  
+---
+
+## Model Explainability
+
+### Feature Importance
+During experimentation, **feature importance** was computed to identify which features contribute most to fraud detection.  
 
 <img width="980" height="808" alt="Screenshot 2025-10-18 203008" src="https://github.com/user-attachments/assets/99cbbd59-41b2-4905-86f0-bfa803a8affd" />
 
+### SHAP Values
+**SHAP** (SHapley Additive exPlanations) was used to provide local and global explanations for predictions.
 
 <img width="1106" height="705" alt="Screenshot 2025-10-18 202924" src="https://github.com/user-attachments/assets/c83b7541-95ab-4400-b914-5780df90adca" />
 
-
-
-
-
-These temporal and account-based signals are **key behavioral indicators** for fraud detection.
-
 ---
 
-## Deployment Considerations
-- **Use-case fit:** suitable for **triage** (flagging suspicious transactions) but **not** for auto-decline in production.  
-- **Threshold tuning:** recommended to optimize precision vs. recall depending on operational cost.  
-- **Monitoring:** add drift detection (PSI, KS, AUC tracking) and calibration checks.  
-- **Pipeline:** wrap preprocessing + model in a single pipeline for inference.  
-- **Shadow deployment** recommended before production rollout.
+##  Roadmap
 
----
-
-## Next Steps / Future Work
-- Threshold tuning for business cost optimization  
-- Temporal validation (rolling windows / backtests)  
-- Probability calibration (isotonic / Platt scaling)  
-- Cost-sensitive learning / focal loss  
-- Add MLflow/DVC for experiment tracking  
-- Deploy inference API for real-time scoring
-
----
-
-## Notes
-- This project demonstrates **realistic handling of an imbalanced classification problem** with **explainability and operational considerations**.  
-- Suitable for academic submission, portfolio showcasing, or as a foundation for a production-grade fraud detection pipeline.
+- [ ] Add automated testing with `pytest`  
+- [ ] Implement schema validation for input data  
+- [ ] Integrate CI/CD pipeline  
+- [ ] Enhance logging and monitoring  
+- [ ] Optimize Docker image and build process
 
 ---
 
 ## Author
 Developed by Opeyemi Aina
 
----
+
+
