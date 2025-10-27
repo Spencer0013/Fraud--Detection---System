@@ -10,7 +10,7 @@ It follows a **two-stage approach**:
 
 1. **Experimentation Phase (Notebook)**  
    - Exploratory Data Analysis (EDA)  
-   - Feature engineering and model experimentation (xgboost / lightgbm / catboost) 
+   - Feature engineering and model experimentation (Logistic Regression/Random forest/xgboost/catboost) 
    - Hyperparameter tuning on a 200,000-row dataset to select the best performing model.
    - **Evaluation**: prioritized **precision-recall** performance over accuracy, due to the nature of fraud detection.
    - Model explainability using feature importance and SHAP values 
@@ -23,6 +23,37 @@ It follows a **two-stage approach**:
 The final model(Catboost) achieves strong performance on fraud detection, with results shown below.
 
 ---
+
+# Dataset
+
+The dataset used for training and testing the fraud detection model was sourced from Kaggle
+.
+It contains anonymized e-commerce transaction records with labels indicating whether each transaction is fraudulent (1) or legitimate (0).
+
+[Train data](https://www.kaggle.com/code/mdshafiuddinshajib/fraud-detection-ecommerce-transaction/input?select=Fraudulent_E-Commerce_Transaction_Data.csv)
+
+[Test data](https://www.kaggle.com/code/mdshafiuddinshajib/fraud-detection-ecommerce-transaction/input?select=Fraudulent_E-Commerce_Transaction_Data_2.csv)
+
+Class Distribution (Training Set)
+Label	Description	Count
+0	Legitimate	1,399,114
+1	Fraudulent	73,838
+
+This clearly shows a highly imbalanced dataset, which is common in fraud detection scenarios.
+
+- Handling Class Imbalance
+
+To address the imbalance and improve the model’s ability to detect fraudulent transactions, different techniques were used depending on the algorithm:
+
+Model	Technique Used	Description
+Logistic Regression	Class Weight	Gave higher importance to the minority (fraudulent) class during training.
+Random Forest	Class Weight	Weighted samples by class to reduce bias toward the majority class.
+CatBoost	SPW (Sample Weighting / Oversampling)	Applied oversampling strategy to balance class distribution.
+XGBoost	SPW (Sample Weighting / Oversampling)	Oversampled minority class to help the model learn fraud patterns.
+
+This combination of class weights and sample weighting (SPW) helped ensure that each model was optimized for high recall and precision on the minority class, which is critical in fraud detection.
+
+The final model(Catboost) achieves strong performance on fraud detection, with results shown below.
 
 ## Model Performance
 
@@ -56,6 +87,38 @@ The final model(Catboost) achieves strong performance on fraud detection, with r
 - **Comprehensive evaluation logging** in structured JSON format.
 
 ---
+
+## Configuration (config.yaml)
+
+This project is driven by a single YAML config that defines artifact locations and I/O paths for each pipeline stage.
+
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_train_path: Data\Train.csv
+  source_test_path: Data\Test.csv
+  train_path: artifacts/data_ingestion/train_data.csv
+  test_path: artifacts/data_ingestion/test_data.csv
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  train_path: artifacts/data_ingestion/train_data.csv
+  test_path: artifacts/data_ingestion/test_data.csv
+  train_data: artifacts/data_transformation/train.csv
+  test_data: artifacts/data_transformation/test.csv
+  preprocessor: artifacts/data_transformation/preprocessor.pkl
+
+model_trainer:
+  root_dir: artifacts/model_trainer
+  model_save_path: artifacts/model_trainer/model.pkl
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  best_model_path: artifacts/model_trainer/model.pkl
+  save_path: artifacts/model_evaluation/evaluation_results.json
+  preprocessor: artifacts/preprocessor.pkl
+
 
 
 ## Project Structure
@@ -124,22 +187,13 @@ python app.py
 ### Feature Importance
 During experimentation, **feature importance** was computed to identify which features contribute most to fraud detection.  
 
-<img width="980" height="808" alt="Screenshot 2025-10-18 203008" src="https://github.com/user-attachments/assets/99cbbd59-41b2-4905-86f0-bfa803a8affd" />
+<img width="1106" height="705" alt="Screenshot 2025-10-18 202924" src="https://github.com/user-attachments/assets/c83b7541-95ab-4400-b914-5780df90adca" />
+
 
 ### SHAP Values
 **SHAP** (SHapley Additive exPlanations) was used to provide local and global explanations for predictions.
 
-<img width="1106" height="705" alt="Screenshot 2025-10-18 202924" src="https://github.com/user-attachments/assets/c83b7541-95ab-4400-b914-5780df90adca" />
-
----
-
-##  Roadmap
-
-- [ ] Add automated testing with `pytest`  
-- [ ] Implement schema validation for input data  
-- [ ] Integrate CI/CD pipeline  
-- [ ] Enhance logging and monitoring  
-- [ ] Optimize Docker image and build process
+<img width="980" height="808" alt="Screenshot 2025-10-18 203008" src="https://github.com/user-attachments/assets/99cbbd59-41b2-4905-86f0-bfa803a8affd" />
 
 ---
 
