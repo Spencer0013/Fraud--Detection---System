@@ -1,3 +1,12 @@
+import sys, os
+
+# Add the ./src directory to the Python path so we can import fraud_detection
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.join(CURRENT_DIR, "src")
+if SRC_DIR not in sys.path:
+    sys.path.append(SRC_DIR)
+
+
 import os
 import tempfile
 import joblib
